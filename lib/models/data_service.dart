@@ -1,16 +1,36 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:path_provider/path_provider.dart';
-import 'dart:convert';
-import 'dart:io';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+import 'dart:async';
 import 'email_service.dart';
 import 'sms_service.dart';
 
 class DataService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  // ignore: unused_field
   final EmailService _emailService = EmailService();
-  // ignore: unused_field
   final SmsService _smsService = SmsService();
+  Database? _database;
+
+  Future<Database> get database async {
+    if (_database != null) return _database!;
+    _database = await _initDatabase();
+    return _database!;
+  }
+
+  Future<Database> _initDatabase() async {
+    final directory = await getApplicationDocumentsDirectory();
+    final path = join(directory.path, 'pending_data.db');
+
+    return await openDatabase(
+      path,
+      version: 1,
+      onCreate: (db, version) {
+        return db.execute(
+            'CREATE TABLE pending_data (id INTEGER PRIMARY KEY AUTOINCREMENT, deliveryType TEXT, waybillNumber TEXT, customerName TEXT, consigneeName TEXT, location TEXT, phoneNumber TEXT, driverEmail TEXT, isSynced INTEGER)');
+      },
+    );
+  }
 
   Future<void> submitData(
     String deliveryType,
@@ -20,12 +40,10 @@ class DataService {
     String location,
     String phoneNumber,
     String driverEmail,
-    //String imageUrl,
     bool isOnline,
   ) async {
     if (isOnline) {
       try {
-        // Submit data to Firestore
         await _firestore.collection('poc_pod').add({
           'deliveryType': deliveryType,
           'waybillNumber': waybillNumber,
@@ -34,17 +52,9 @@ class DataService {
           'location': location,
           'phoneNumber': phoneNumber,
           'driverEmail': driverEmail,
-          //'imageUrl': imageUrl,
           'timestamp': FieldValue.serverTimestamp(),
         });
-
-       /* // After successful submission, send notifications
-        await _emailService.sendEmailNotification(
-            driverEmail, waybillNumber, imageUrl);
-        await _smsService.sendSmsNotification(
-            phoneNumber, waybillNumber, imageUrl);*/
       } catch (e) {
-        // If an error occurs, save data locally for later submission
         await _saveDataLocally({
           'deliveryType': deliveryType,
           'waybillNumber': waybillNumber,
@@ -53,13 +63,12 @@ class DataService {
           'location': location,
           'phoneNumber': phoneNumber,
           'driverEmail': driverEmail,
-          //'imageUrl': imageUrl,
-          'isSynced': false,
+          'isSynced': 0,
         });
+        print('Data saved locally due to error: $e');
         throw Exception('Failed to submit data: $e');
       }
     } else {
-      // Save data locally for later submission
       await _saveDataLocally({
         'deliveryType': deliveryType,
         'waybillNumber': waybillNumber,
@@ -68,23 +77,56 @@ class DataService {
         'location': location,
         'phoneNumber': phoneNumber,
         'driverEmail': driverEmail,
-        //'imageUrl': imageUrl,
-        'isSynced': false,
+        'isSynced': 0,
       });
+      print('Data saved locally while offline');
     }
   }
 
   Future<void> _saveDataLocally(Map<String, dynamic> data) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/pending_data.json');
-    List<Map<String, dynamic>> pendingData = [];
+    final db = await database;
+    await db.insert('pending_data', data);
+    print(
+        'Local storage: Data inserted for waybillNumber: ${data['waybillNumber']}');
+  }
 
-    if (await file.exists()) {
-      String content = await file.readAsString();
-      pendingData = List<Map<String, dynamic>>.from(json.decode(content));
+  Future<List<Map<String, dynamic>>> getPendingData() async {
+    final db = await database;
+    return await db
+        .query('pending_data', where: 'isSynced = ?', whereArgs: [0]);
+  }
+
+  Future<void> syncPendingData() async {
+    final db = await database;
+    List<Map<String, dynamic>> pendingData = await getPendingData();
+
+    for (var data in pendingData) {
+      try {
+        await _firestore.collection('poc_pod').add({
+          'deliveryType': data['deliveryType'],
+          'waybillNumber': data['waybillNumber'],
+          'customerName': data['customerName'],
+          'consigneeName': data['consigneeName'],
+          'location': data['location'],
+          'phoneNumber': data['phoneNumber'],
+          'driverEmail': data['driverEmail'],
+          'timestamp': FieldValue.serverTimestamp(),
+        });
+        await db.update('pending_data', {'isSynced': 1},
+            where: 'id = ?', whereArgs: [data['id']]);
+        print('Data synced for waybillNumber: ${data['waybillNumber']}');
+      } catch (e) {
+        print(
+            'Failed to sync data for waybillNumber: ${data['waybillNumber']}, Error: $e');
+        continue;
+      }
     }
+  }
 
-    pendingData.add(data);
-    await file.writeAsString(json.encode(pendingData));
+  // Method to retrieve all waybill numbers from the local database
+  Future<List<String>> getAllWaybillNumbers() async {
+    final db = await database;
+    final result = await db.query('pending_data', columns: ['waybillNumber']);
+    return result.map((e) => e['waybillNumber'] as String).toList();
   }
 }

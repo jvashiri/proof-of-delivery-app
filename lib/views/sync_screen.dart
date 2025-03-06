@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:driver_app/models/data_service.dart';  // Ensure DataService is properly imported
 
 class SyncScreen extends StatefulWidget {
   @override
@@ -10,63 +9,73 @@ class SyncScreen extends StatefulWidget {
 }
 
 class _SyncScreenState extends State<SyncScreen> {
-  bool _isSyncing = false;
-  String _syncStatus = 'Not Synced';
+  List<Map<String, String>> _waybills = [];
 
-  Future<void> _syncData() async {
-    setState(() {
-      _isSyncing = true;
-      _syncStatus = 'Syncing...';
-    });
+  @override
+  void initState() {
+    super.initState();
+    _loadWaybills();
+  }
 
-    final connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.none) {
-      setState(() {
-        _syncStatus = 'No internet connection. Please try again later.';
-        _isSyncing = false;
-      });
-      return;
+  // Load waybill numbers from both the SQLite database and local files
+  Future<void> _loadWaybills() async {
+    List<Map<String, String>> waybills = [];
+
+    // Load waybill numbers from the local database
+    DataService dataService = DataService();
+    List<String> waybillNumbersFromDb = await dataService.getAllWaybillNumbers();
+    for (var waybillNumber in waybillNumbersFromDb) {
+      waybills.add({'source': 'Database', 'waybillNumber': waybillNumber});
     }
 
-    // Implement your sync logic here
-    // For example, upload local files to Firebase Storage
+    // Load waybill numbers from local files
     final directory = await getApplicationDocumentsDirectory();
     final files = directory.listSync();
-    for (var file in files) {
-      if (file is File) {
-        final storageRef = FirebaseStorage.instance.ref().child('poc_pod/${file.path.split('/').last}');
-        await storageRef.putFile(file);
-        // Optionally, delete the local file after successful upload
-        await file.delete();
-      }
+
+    for (var file in files.whereType<File>()) {
+      String content = await file.readAsString();
+      String waybillNumber = _extractWaybillNumber(content);
+      waybills.add({'source': 'File', 'waybillNumber': waybillNumber});
     }
 
     setState(() {
-      _syncStatus = 'Sync completed successfully';
-      _isSyncing = false;
+      _waybills = waybills;
     });
+  }
+
+  // Extract the waybill number from the file content
+  String _extractWaybillNumber(String content) {
+    // Assuming the waybill number is present in the content as "waybillNumber: <number>"
+    RegExp regex = RegExp(r'waybillNumber:\s*(\S+)');
+    var match = regex.firstMatch(content);
+    return match != null ? match.group(1) ?? '' : 'Unknown';
+  }
+
+  // Simulate syncing the waybill
+  void _syncWaybill(String waybillNumber) {
+    // Implement the syncing logic here
+    print('Syncing waybill $waybillNumber...');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: AppBar(title: Text('Sync Data')),
-      backgroundColor: Colors.grey[200],
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(_syncStatus),
-            SizedBox(height: 20),
-            _isSyncing
-                ? CircularProgressIndicator()
-                : ElevatedButton(
-                    onPressed: _syncData,
-                    child: Text('Sync Now'),
+      appBar: AppBar(title: Text('Local Waybills')),
+      body: _waybills.isEmpty
+          ? Center(child: Text('No local waybills found'))
+          : ListView.builder(
+              itemCount: _waybills.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text('Waybill Number: ${_waybills[index]['waybillNumber']}'),
+                  subtitle: Text('Source: ${_waybills[index]['source']}'),
+                  trailing: IconButton(
+                    icon: Icon(Icons.sync),
+                    onPressed: () => _syncWaybill(_waybills[index]['waybillNumber']!),
                   ),
-          ],
-        ),
-      ),
+                );
+              },
+            ),
     );
   }
 }
