@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "138766808401",
+    "project_id": "webfarming-delivery",
+    "storage_bucket": "webfarming-delivery.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:138766808401:android:00877075d76827cc3a8f70",
+        "android_client_info": {
+          "package_name": "za.webfarming.deliveryapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpeLbh0P_x3Rh1NySvTEGNpZrH29GdK6I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

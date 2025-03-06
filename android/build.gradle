@@ -1,0 +1,37 @@
+buildscript
+ {
+    repositories {
+        google()
+        mavenCentral()
+        //maven { url "https://jitpack.io" } // JitPack repository
+        maven { url "https://maven.google.com" } // Google's Maven repository
+    }
+    dependencies {
+        //classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.7.0' // Use the latest compatible version
+         //classpath 'com.android.tools.build:gradle:8.0.2'
+        //classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+               // START: FlutterFire Configuration
+        classpath 'com.google.gms:google-services:4.3.14'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.1'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        //maven { url "https://jitpack.io" }
+        maven { url "https://maven.google.com" }
+    }
+}
+
+rootProject.buildDir = "../build"
+
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
