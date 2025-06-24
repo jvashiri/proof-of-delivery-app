@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # WebFarming POD
 
 
@@ -91,3 +92,7 @@ For open source projects, say how it is licensed.
 
 ## Project status
 If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+=======
+# proof-of-delivery-app
+An offline-first mobile application designed for delivery personnel to capture and manage proof of delivery efficiently, even in areas with limited or no internet connectivity.
+>>>>>>> c873801d7ae565c99b83d917cfa5c6ac0b79b6f0
