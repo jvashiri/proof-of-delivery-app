@@ -48,14 +48,14 @@ InputDecoration inputDecorationin(String label) {
 final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
   foregroundColor: Colors.white, // Text color
   backgroundColor: primaryColor, // Green button
-  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(8),
   ),
 );
 
 // AppBar Theme
-final AppBarTheme appBarTheme = AppBarTheme(
+const AppBarTheme appBarTheme = AppBarTheme(
   backgroundColor: primaryColor,
   elevation: 0,
   titleTextStyle: TextStyle(

@@ -1,103 +1,78 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:driver_app/models/data_service.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:convert';
-import 'dart:io';
+import 'package:share_plus/share_plus.dart';
+import '../controllers/sync_screen_controller.dart';
+import '../models/pod_model.dart';
 
 class SyncScreen extends StatefulWidget {
+  const SyncScreen({super.key});
+
   @override
-  _SyncScreenState createState() => _SyncScreenState();
+  State<SyncScreen> createState() => _SyncScreenState();
 }
 
 class _SyncScreenState extends State<SyncScreen> {
-  final DataService _dataService = DataService();
-  List<Map<String, dynamic>> pendingData = [];
+  final SyncScreenController _controller = SyncScreenController();
+  List<PodModel> _pendingData = [];
 
   @override
   void initState() {
     super.initState();
-    _loadPendingData();
+    _loadData();
   }
 
-  Future<void> _loadPendingData() async {
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/pending_data.json');
+  Future<void> _loadData() async {
+    final pods = await _controller.getPendingPods();
+    setState(() => _pendingData = pods);
+  }
 
-    if (await file.exists()) {
-      String content = await file.readAsString();
-      setState(() {
-        pendingData = List<Map<String, dynamic>>.from(json.decode(content));
-      });
+  Future<void> _syncAll() async {
+    if (!await _controller.isConnected()) {
+      _showMessage("No internet connection");
+      return;
     }
+
+    for (final pod in _pendingData) {
+      await _controller.syncPod(pod);
+    }
+
+    _showMessage("All data synced successfully.");
+    _loadData();
   }
 
-  Future<void> _syncData(Map<String, dynamic> data) async {
-    bool isConnected = await _isConnected();
-    if (isConnected) {
-      try {
-        await _dataService.submitData(
-          data['deliveryType'],
-          data['waybillNumber'],
-          data['customerName'],
-          data['consigneeName'],
-          data['location'],
-          data['phoneNumber'],
-          data['driverEmail'],
-          //data['imageUrl'],
-          true, // isOnline
-        );
-        await _updateSyncStatus(data['id'], true);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("POC/POD Synced Successfully")),
-        );
-        _loadPendingData();
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Error syncing data: ${e.toString()}")),
-        );
-      }
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("No internet connection")),
+  Future<void> _syncOne(PodModel pod) async {
+    if (!await _controller.isConnected()) {
+      _showMessage("No internet connection");
+      return;
+    }
+
+    await _controller.syncPod(pod);
+    _showMessage("Synced ${pod.waybill}");
+    _loadData();
+  }
+
+  void _showMessage(String message) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  Future<void> _shareLink(String waybill) async {
+    final url = "https://otp.webfarming.co.za/web/upload.html?waybill=$waybill";
+    final message =
+        "Please upload the POD image for waybill $waybill using this link:\n$url";
+
+    try {
+      await Share.share(
+        message,
+        subject: 'Upload POD Image',
       );
-    }
-  }
-
-  Future<void> _syncAllData() async {
-    bool isConnected = await _isConnected();
-    if (isConnected) {
-      for (var data in pendingData) {
-        await _syncData(data);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error sharing link: $e");
       }
-    } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("No internet connection")),
+        const SnackBar(content: Text('Failed to share the link')),
       );
-    }
-  }
-
-  Future<bool> _isConnected() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    return connectivityResult != ConnectivityResult.none;
-  }
-
-  Future<void> _updateSyncStatus(String id, bool isSynced) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/pending_data.json');
-
-    if (await file.exists()) {
-      String content = await file.readAsString();
-      List<Map<String, dynamic>> pendingData = List<Map<String, dynamic>>.from(json.decode(content));
-
-      for (var data in pendingData) {
-        if (data['id'] == id) {
-          data['isSynced'] = isSynced;
-          break;
-        }
-      }
-
-      await file.writeAsString(json.encode(pendingData));
     }
   }
 
@@ -105,30 +80,46 @@ class _SyncScreenState extends State<SyncScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sync Data'),
+        title: const Text("All"),
         actions: [
           IconButton(
-            icon: Icon(Icons.sync),
-            onPressed: _syncAllData,
+            icon: const Icon(Icons.sync),
+            onPressed: _syncAll,
+            tooltip: "Sync All",
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: pendingData.length,
-        itemBuilder: (context, index) {
-          var data = pendingData[index];
-          return Card(
-            child: ListTile(
-              title: Text(data['waybillNumber']),
-              subtitle: Text(data['customerName']),
-              trailing: IconButton(
-                icon: Icon(Icons.sync),
-                onPressed: () => _syncData(data),
-              ),
+      body: _pendingData.isEmpty
+          ? const Center(child: Text("No data to sync"))
+          : ListView.builder(
+              itemCount: _pendingData.length,
+              itemBuilder: (context, index) {
+                final pod = _pendingData[index];
+                return Card(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  child: ListTile(
+                    title: Text("Waybill: ${pod.waybill}"),
+                    subtitle: Text("${pod.customer} • ${pod.location}"),
+                    trailing: Wrap(
+                      spacing: 10,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.share),
+                          tooltip: "Share Upload Link",
+                          onPressed: () => _shareLink(pod.waybill),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.sync),
+                          tooltip: "Sync Now",
+                          onPressed: () => _syncOne(pod),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
-          );
-        },
-      ),
     );
   }
 }

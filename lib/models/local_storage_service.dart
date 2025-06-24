@@ -22,4 +22,6 @@ class LocalStorageService implements ILocalStorageService {
   updateSyncStatus(data, bool bool) {}
 
   getPendingSyncData() {}
+
+  saveData(Map<String, String> data) {}
 }

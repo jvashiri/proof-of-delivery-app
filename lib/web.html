@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload POD Image</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f7f7f7;
+    }
+    .container {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    input[type="file"] {
+      margin: 15px 0;
+    }
+    button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #message {
+      margin-top: 20px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Upload POD Image</h2>
+    <p id="waybillInfo"></p>
+    <input type="file" id="fileInput" accept="image/*" />
+    <button onclick="upload()">Upload</button>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const waybill = params.get("waybill");
+    document.getElementById("waybillInfo").textContent = waybill ? `For Waybill: ${waybill}` : "Waybill not specified.";
+
+    async function upload() {
+      const fileInput = document.getElementById("fileInput");
+      const file = fileInput.files[0];
+      if (!file || !waybill) {
+        alert("Missing file or waybill information.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("image", file);
+      formData.append("waybill", waybill);
+
+      try {
+        const response = await fetch("https://your-api.com/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          document.getElementById("message").textContent = "Image uploaded successfully!";
+        } else {
+          document.getElementById("message").textContent = "Upload failed: " + result.error;
+        }
+      } catch (err) {
+        document.getElementById("message").textContent = "An error occurred during upload.";
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f6fde29f-3585-4aa2-ac3f-a4ef0168e8f2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/.cmake/api/v1/query/client-agp/cache-v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/.cmake/api/v1/query/client-agp/cmakeFiles-v1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/.cmake/api/v1/query/client-agp/codemodel-v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/.cmake/api/v1/reply/cache-v2-d9f50e677f361d1c319c.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/.cmake/api/v1/reply/cmakeFiles-v1-327f036d0cacba1d17bf.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/.cmake/api/v1/reply/codemodel-v2-20a4a7f4d33002528fa8.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/.cmake/api/v1/reply/directory-.-RelWithDebInfo-d0094a50bb2071803777.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/.cmake/api/v1/reply/index-2025-06-02T22-21-07-0042.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/CMakeCache.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/CMakeFiles/3.22.1-g37088a8-dirty/CMakeCCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/CMakeFiles/3.22.1-g37088a8-dirty/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/CMakeFiles/3.22.1-g37088a8-dirty/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/CMakeFiles/3.22.1-g37088a8-dirty/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/CMakeFiles/3.22.1-g37088a8-dirty/CMakeSystem.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdC/CMakeCCompilerId.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdCXX/CMakeCXXCompilerId.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/CMakeFiles/cmake.check_cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/CMakeFiles/rules.ninja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/additional_project_files.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/android_gradle_build.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/android_gradle_build_mini.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/build.ninja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/build_file_index.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/cmake_install.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/configure_fingerprint.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/metadata_generation_command.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/prefab_config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/arm64-v8a/symbol_folder_index.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/.cmake/api/v1/query/client-agp/cache-v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/.cmake/api/v1/query/client-agp/cmakeFiles-v1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/.cmake/api/v1/query/client-agp/codemodel-v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/.cmake/api/v1/reply/cache-v2-99014ee1af4111efe193.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/.cmake/api/v1/reply/cmakeFiles-v1-3873ef149590ac93532d.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/.cmake/api/v1/reply/codemodel-v2-09f19c437200c8c52da5.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/.cmake/api/v1/reply/directory-.-RelWithDebInfo-d0094a50bb2071803777.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/.cmake/api/v1/reply/index-2025-06-02T22-21-19-0100.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/CMakeCache.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/CMakeFiles/3.22.1-g37088a8-dirty/CMakeCCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/CMakeFiles/3.22.1-g37088a8-dirty/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/CMakeFiles/3.22.1-g37088a8-dirty/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/CMakeFiles/3.22.1-g37088a8-dirty/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/CMakeFiles/3.22.1-g37088a8-dirty/CMakeSystem.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdC/CMakeCCompilerId.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdCXX/CMakeCXXCompilerId.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/CMakeFiles/cmake.check_cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/CMakeFiles/rules.ninja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/additional_project_files.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/android_gradle_build.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/android_gradle_build_mini.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/build.ninja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/build_file_index.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/cmake_install.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/configure_fingerprint.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/metadata_generation_command.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/prefab_config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/armeabi-v7a/symbol_folder_index.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/hash_key.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/.cmake/api/v1/query/client-agp/cache-v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/.cmake/api/v1/query/client-agp/cmakeFiles-v1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/.cmake/api/v1/query/client-agp/codemodel-v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/.cmake/api/v1/reply/cache-v2-2e40f50d19f0a316cd54.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/.cmake/api/v1/reply/cmakeFiles-v1-1cbd2b72a034fb91007a.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/.cmake/api/v1/reply/codemodel-v2-0bd7aff1add31fc9a94d.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/.cmake/api/v1/reply/directory-.-RelWithDebInfo-d0094a50bb2071803777.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/.cmake/api/v1/reply/index-2025-06-02T22-21-22-0013.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/CMakeCache.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/CMakeFiles/3.22.1-g37088a8-dirty/CMakeCCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/CMakeFiles/3.22.1-g37088a8-dirty/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/CMakeFiles/3.22.1-g37088a8-dirty/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/CMakeFiles/3.22.1-g37088a8-dirty/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/CMakeFiles/3.22.1-g37088a8-dirty/CMakeSystem.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdC/CMakeCCompilerId.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdCXX/CMakeCXXCompilerId.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/CMakeFiles/cmake.check_cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/CMakeFiles/rules.ninja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/additional_project_files.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/android_gradle_build.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/android_gradle_build_mini.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/build.ninja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/build_file_index.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/cmake_install.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/configure_fingerprint.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/metadata_generation_command.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/prefab_config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86/symbol_folder_index.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/.cmake/api/v1/query/client-agp/cache-v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/.cmake/api/v1/query/client-agp/cmakeFiles-v1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/.cmake/api/v1/query/client-agp/codemodel-v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/.cmake/api/v1/reply/cache-v2-4977f21e772871875529.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/.cmake/api/v1/reply/cmakeFiles-v1-c1c930382fde5d955116.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/.cmake/api/v1/reply/codemodel-v2-5c4c3916c8f6568561f3.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/.cmake/api/v1/reply/directory-.-RelWithDebInfo-d0094a50bb2071803777.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/.cmake/api/v1/reply/index-2025-06-02T22-21-25-0521.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/CMakeCache.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/CMakeFiles/3.22.1-g37088a8-dirty/CMakeCCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/CMakeFiles/3.22.1-g37088a8-dirty/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/CMakeFiles/3.22.1-g37088a8-dirty/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/CMakeFiles/3.22.1-g37088a8-dirty/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/CMakeFiles/3.22.1-g37088a8-dirty/CMakeSystem.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdC/CMakeCCompilerId.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/CMakeFiles/3.22.1-g37088a8-dirty/CompilerIdCXX/CMakeCXXCompilerId.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/CMakeFiles/cmake.check_cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/CMakeFiles/rules.ninja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/additional_project_files.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/android_gradle_build.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/android_gradle_build_mini.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/build.ninja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/build_file_index.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/cmake_install.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/configure_fingerprint.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/metadata_generation_command.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/prefab_config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cxx/RelWithDebInfo/4h214r2r/x86_64/symbol_folder_index.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/profile/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/profile/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/database/pod_dao.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/database/pod_model.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/models/connectivity_service.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/models/data_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/models/data_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/models/image_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/models/image_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/models/local_storage_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/models/local_storage_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/models/location_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/models/location_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/models/poc_pod_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/models/poc_pod_view_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/views/forgot_password_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/views/forgot_password_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/views/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/views/login_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/views/offline_sync.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/views/offline_sync.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/views/poc_pod_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/views/poc_pod_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/views/sync_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/views/sync_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/widgets/poc_pod_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../lib/widgets/poc_pod_form.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../../macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../../pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/main_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../test/main_test.dart" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="2y2hngxGJ8bRN8hWx4LigbycB85" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "android.gradle.sync.needed": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/driver_app",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f6fde29f-3585-4aa2-ac3f-a4ef0168e8f2" name="Changes" comment="" />
+      <created>1749038744531</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1749038744531</updated>
+    </task>
+    <servers />
+  </component>
+</project>

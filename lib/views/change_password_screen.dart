@@ -1,115 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:driver_app/screens/poc_pod_screen.dart';
 import 'package:driver_app/app_styles.dart';
+import '../models/change_password_model.dart';
+import '../controllers/change_password_controller.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
+  const ChangePasswordScreen({super.key});
+
   @override
-  _ChangePasswordScreenState createState() => _ChangePasswordScreenState();
+  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
 }
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final _oldPasswordController = TextEditingController();
+  final _newPasswordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
-  final TextEditingController _oldPasswordController = TextEditingController();
-  final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
-
+  final _controller = ChangePasswordController();
   bool _isLoading = false;
 
-  /// Function to change password
-  Future<void> _changePassword() async {
-    setState(() {
-      _isLoading = true;
-    });
-
-    User? user = _auth.currentUser;
-    if (user == null) {
-      _showSnackbar("User not found. Please sign in again.");
-      return;
-    }
-
-    if (_newPasswordController.text.length < 6) {
-      _showSnackbar("New password must be at least 6 characters.");
-      setState(() {
-        _isLoading = false;
-      });
-      return;
-    }
-
-    if (_newPasswordController.text != _confirmPasswordController.text) {
-      _showSnackbar("New password and confirm password do not match.");
-      setState(() {
-        _isLoading = false;
-      });
-      return;
-    }
-
-    try {
-      // Reauthenticate the user
-      AuthCredential credential = EmailAuthProvider.credential(
-        email: user.email!,
-        password: _oldPasswordController.text,
-      );
-
-      await user.reauthenticateWithCredential(credential);
-      
-      // Update password
-      await user.updatePassword(_newPasswordController.text);
-
-      _showSnackbar("Password changed successfully. Please log in again.");
-      await _auth.signOut();
-
-      // Redirect to login screen
-      Navigator.pushReplacementNamed(context, '/login');
-    } on FirebaseAuthException catch (e) {
-      setState(() {
-        _isLoading = false;
-      });
-
-      if (e.code == 'wrong-password') {
-        _showSnackbar("Old password is incorrect.");
-      } else if (e.code == 'weak-password') {
-        _showSnackbar("New password is too weak.");
-      } else if (e.code == 'user-mismatch' || e.code == 'user-not-found') {
-        _showSnackbar("User session expired. Please log in again.");
-        await _auth.signOut();
-        Navigator.pushReplacementNamed(context, '/login');
-      } else {
-        _showSnackbar("Error: ${e.message}");
-      }
-    } catch (e) {
-      _showSnackbar("An unexpected error occurred: ${e.toString()}");
-      setState(() {
-        _isLoading = false;
-      });
-    }
+  @override
+  void dispose() {
+    _oldPasswordController.dispose();
+    _newPasswordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
   }
 
-  /// Function to show Snackbar
-  void _showSnackbar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+  void _onChangePassword() {
+    final model = ChangePasswordModel(
+      oldPassword: _oldPasswordController.text.trim(),
+      newPassword: _newPasswordController.text.trim(),
+      confirmPassword: _confirmPasswordController.text.trim(),
+    );
+
+    _controller.changePassword(
+      model,
+      context,
+      () => setState(() => _isLoading = true),
+      () => setState(() => _isLoading = false),
+    );
   }
 
-  /// Reusable text field for password input
-  Widget _buildTextField(String label, TextEditingController controller, {bool obscureText = false}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: labelStyle),
-        SizedBox(height: 5),
-        Container(
-          decoration: inputDecoration,
-          padding: EdgeInsets.symmetric(horizontal: 15),
-          child: TextField(
-            controller: controller,
-            obscureText: obscureText,
-            decoration: InputDecoration(border: InputBorder.none),
-            style: inputStyle,
+  Widget _buildTextField(String label, TextEditingController controller, {bool obscure = false}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: labelStyle),
+          const SizedBox(height: 5),
+          Container(
+            decoration: inputDecoration,
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: TextField(
+              controller: controller,
+              obscureText: obscure,
+              decoration: const InputDecoration(border: InputBorder.none),
+              style: inputStyle,
+            ),
           ),
-        ),
-        SizedBox(height: 15),
-      ],
+        ],
+      ),
     );
   }
 
@@ -117,27 +68,25 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Change Password"),
+        title: const Text("Change Password"),
         backgroundColor: primaryColor,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(20),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildTextField("Old Password", _oldPasswordController, obscureText: true),
-            _buildTextField("New Password", _newPasswordController, obscureText: true),
-            _buildTextField("Confirm New Password", _confirmPasswordController, obscureText: true),
-
-            SizedBox(height: 20),
-
+            _buildTextField("Old Password", _oldPasswordController, obscure: true),
+            _buildTextField("New Password", _newPasswordController, obscure: true),
+            _buildTextField("Confirm New Password", _confirmPasswordController, obscure: true),
+            const SizedBox(height: 20),
             Center(
               child: _isLoading
-                  ? CircularProgressIndicator()
+                  ? const CircularProgressIndicator()
                   : ElevatedButton.icon(
-                      onPressed: _changePassword,
-                      icon: Icon(Icons.lock),
-                      label: Text("Change Password"),
+                      onPressed: _onChangePassword,
+                      icon: const Icon(Icons.lock),
+                      label: const Text("Change Password"),
                       style: buttonStyle,
                     ),
             ),

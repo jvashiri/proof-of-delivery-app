@@ -1,99 +1,174 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:driver_app/models/location_service.dart';
-import 'package:driver_app/models/image_service.dart';
-import 'package:driver_app/models/data_service.dart';
-import 'package:driver_app/models/authentication_service.dart';
-import 'package:driver_app/models/connectivity_service.dart';
-import 'package:driver_app/models/local_storage_service.dart';
 import 'package:driver_app/models/poc_pod_view_model.dart';
-import 'package:driver_app/widgets/poc_pod_form.dart'; // Import the form widget
+import '../controllers/poc_pod_controller.dart';
+import '../utils/image_helper.dart';
 
-class PocPodScreen extends StatelessWidget {
+class PocPodScreen extends StatefulWidget {
   final bool isOnline;
+  const PocPodScreen({super.key, required this.isOnline});
 
-  PocPodScreen({required this.isOnline});
+  @override
+  State<PocPodScreen> createState() => _PocPodScreenState();
+}
+
+class _PocPodScreenState extends State<PocPodScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final Color primaryGreen = const Color(0xFF388E3C);
+  late PocPodViewModel viewModel;
+  late PocPodController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel = PocPodViewModel();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => PocPodViewModel(
-        locationService: LocationService(),
-        imageService: ImageService(),
-        dataService: DataService(),
-        authService: AuthenticationService(),
-        connectivityService: ConnectivityService(),
-        localStorageService: LocalStorageService(),
+    controller = PocPodController(viewModel: viewModel, context: context);
+
+    return ChangeNotifierProvider.value(
+      value: viewModel,
+      child: Consumer<PocPodViewModel>(
+        builder: (context, model, _) {
+          return Scaffold(
+            backgroundColor: const Color(0xFFF0F8F1),
+            body: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    _buildFormCard(model),
+                    const SizedBox(height: 30),
+                    _buildSaveButton(),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
-      child: Scaffold(
-        backgroundColor: Colors.grey[200],
-        body: SingleChildScrollView(
-          padding: EdgeInsets.all(20),
-          child: Consumer<PocPodViewModel>(
-            builder: (context, viewModel, child) {
-              return PocPodForm(
-                deliveryType: viewModel.deliveryType,
-                waybillController: viewModel.waybillController,
-                customerController: viewModel.customerController,
-                consigneeController: viewModel.consigneeController,
-                phoneNumberController: viewModel.phoneNumberController,
-                location: viewModel.location,
-                image: viewModel.image,
-                imageUrl: viewModel.imageUrl,
-                onDeliveryTypeChanged: (val) =>
-                    viewModel.deliveryType = val as String,
-                onCaptureLocation: viewModel.captureLocation,
-                onShowImageSourceActionSheet: () =>
-                    showImageSourceActionSheet(context, viewModel),
-                onSubmitData: () async {
-                  try {
-                    await viewModel.submitData(isOnline);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("POC/POD Captured Successfully")),
-                    );
-                  } catch (e) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(e.toString())),
-                    );
-                  }
-                },
-                isOnline: isOnline,
-              );
-            },
-          ),
+    );
+  }
+
+  Widget _buildFormCard(PocPodViewModel model) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      elevation: 4,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            _buildDropdown(model),
+            const SizedBox(height: 16),
+            _buildTextField(model.waybillController, 'Waybill Number'),
+            _buildTextField(model.customerController, 'Customer Name'),
+            _buildTextField(
+              model.consigneeController,
+              model.deliveryType == 'Pickup' ? 'Shipper' : 'Consignee',
+            ),
+            _buildTextField(
+              model.phoneNumberController,
+              'Phone Number',
+              keyboardType: TextInputType.phone,
+              validator: controller.validatePhoneNumber,
+              prefixText: '+27',
+              prefixStyle: TextStyle(color: Colors.grey.shade700),
+            ),
+            const SizedBox(height: 24),
+            _buildImageUploadSection(model),
+          ],
         ),
       ),
     );
   }
 
-  void showImageSourceActionSheet(BuildContext context, PocPodViewModel viewModel) {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return SafeArea(
-          child: Wrap(
-            children: <Widget>[
-              ListTile(
-                leading: Icon(Icons.photo_library),
-                title: Text('Photo Library'),
-                onTap: () {
-                  viewModel.pickImage(ImageSource.gallery);
-                  Navigator.of(context).pop();
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.photo_camera),
-                title: Text('Camera'),
-                onTap: () {
-                  viewModel.pickImage(ImageSource.camera);
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          ),
-        );
+  Widget _buildDropdown(PocPodViewModel model) {
+    return DropdownButtonFormField<String>(
+      value: model.deliveryType,
+      decoration: InputDecoration(
+        labelText: 'Delivery Type',
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+      items: const [
+        DropdownMenuItem(value: 'Pickup', child: Text('Pickup')),
+        DropdownMenuItem(value: 'Dropoff', child: Text('Dropoff')),
+      ],
+      onChanged: (val) {
+        if (val != null) model.deliveryType = val;
       },
+    );
+  }
+
+  Widget _buildTextField(
+    TextEditingController controller,
+    String label, {
+    TextInputType keyboardType = TextInputType.text,
+    String? Function(String?)? validator,
+    String? prefixText,
+    TextStyle? prefixStyle,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: TextFormField(
+        controller: controller,
+        keyboardType: keyboardType,
+        decoration: InputDecoration(
+          labelText: label,
+          prefixText: prefixText,
+          prefixStyle: prefixStyle,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        ),
+        validator: validator ??
+            (value) =>
+                (value == null || value.isEmpty) ? '$label is required' : null,
+      ),
+    );
+  }
+
+  Widget _buildImageUploadSection(PocPodViewModel model) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('Proof of Delivery Image',
+            style: TextStyle(fontWeight: FontWeight.bold)),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            ImageHelper.buildImageWidget(imagePath: model.image?.path),
+            const SizedBox(width: 16),
+            ElevatedButton.icon(
+              icon: const Icon(Icons.upload_file),
+              label: const Text('Upload Image'),
+              onPressed: controller.showImageSourceOptions,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green.shade50,
+                foregroundColor: primaryGreen,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)),
+              ),
+            )
+          ],
+        )
+      ],
+    );
+  }
+
+  Widget _buildSaveButton() {
+    return FilledButton.icon(
+      icon: const Icon(Icons.save),
+      label: const Text('Save Details'),
+      style: FilledButton.styleFrom(
+        backgroundColor: primaryGreen,
+        foregroundColor: Colors.white,
+        minimumSize: const Size.fromHeight(50),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+      onPressed: () => controller.saveForm(_formKey),
     );
   }
 }

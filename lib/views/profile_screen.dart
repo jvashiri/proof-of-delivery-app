@@ -1,73 +1,123 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:driver_app/views/change_password_screen.dart'; // Import ChangePasswordScreen
+import 'package:driver_app/controllers/profile_controller.dart';
+import 'package:driver_app/views/change_password_screen.dart';
 import 'package:driver_app/app_styles.dart';
 
 class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
+
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final ProfileController _controller = ProfileController();
+  String _email = '';
 
-  /// Function to sign out
-  Future<void> _signOut() async {
-    await _auth.signOut();
-    Navigator.pushReplacementNamed(context, '/login');
+  @override
+  void initState() {
+    super.initState();
+    _loadUserProfile();
   }
 
-  /// Build Profile Content
-  Widget _buildProfileContent() {
-    return SingleChildScrollView(
-      padding: EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 20),
-
-          Center(
-            child: ElevatedButton.icon(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ChangePasswordScreen()),
-                );
-              },
-              icon: Icon(Icons.lock),
-              label: Text("Change Password"),
-              style: buttonStyle,
-            ),
-          ),
-
-          SizedBox(height: 40),
-
-          Center(
-            child: ElevatedButton.icon(
-              onPressed: _signOut,
-              icon: Icon(Icons.exit_to_app),
-              label: Text("Sign Out"),
-              style: buttonStyle.copyWith(
-                backgroundColor: WidgetStateProperty.all(Colors.red),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+  Future<void> _loadUserProfile() async {
+    final email = await _controller.getUserEmail();
+    setState(() {
+      _email = email;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // AppBar is now handled directly within the ProfileScreen widget
     return Scaffold(
-     /* appBar: AppBar(
-        title: Text("Profile Settings"),
-        backgroundColor: primaryColor, // Custom color for the app bar
-        automaticallyImplyLeading: false, // Disables back button
-      ),*/
-      backgroundColor: Colors.grey[200],
-      body: _buildProfileContent(),
+      backgroundColor: const Color(0xFFF1F5F9),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Profile Avatar
+            CircleAvatar(
+              radius: 50,
+              backgroundColor: Colors.grey[300],
+              child: const Icon(
+                Icons.person,
+                size: 60,
+                color: Colors.white,
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            // Email Text (No Card Background)
+            Text(
+              'Logged in as',
+              style: TextStyle(color: Colors.grey[600], fontSize: 14),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              _email,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+
+            const SizedBox(height: 40),
+
+            // Action Buttons
+            Column(
+              children: [
+                Center(
+                  child: SizedBox(
+                    width: 250,
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const ChangePasswordScreen()),
+                        );
+                      },
+                      icon: const Icon(Icons.lock_outline),
+                      label: const Text("Change Password"),
+                      style: buttonStyle.copyWith(
+                        padding: WidgetStateProperty.all(
+                          const EdgeInsets.symmetric(vertical: 16),
+                        ),
+                        textStyle: WidgetStateProperty.all(
+                          const TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Center(
+                  child: SizedBox(
+                    width: 250,
+                    child: ElevatedButton.icon(
+                      onPressed: () => _controller.signOut(context),
+                      icon: const Icon(Icons.logout),
+                      label: const Text("Sign Out"),
+                      style: buttonStyle.copyWith(
+                        backgroundColor: WidgetStateProperty.all(Colors.red),
+                        padding: WidgetStateProperty.all(
+                          const EdgeInsets.symmetric(vertical: 16),
+                        ),
+                        textStyle: WidgetStateProperty.all(
+                          const TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

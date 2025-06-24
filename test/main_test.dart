@@ -6,7 +6,7 @@ import 'package:driver_app/views/profile_screen.dart';
 
 void main() {
   testWidgets('Bottom navigation bar switches between screens', (WidgetTester tester) async {
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(const MyApp());
 
     // Verify that PocPodScreen is displayed initially
     expect(find.text('POD'), findsOneWidget);
