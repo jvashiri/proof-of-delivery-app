@@ -2,13 +2,11 @@
 
 An **offline-first Flutter app** built for delivery drivers and couriers to collect and manage Proof of Delivery (POD) data in the field. This app allows users to capture delivery details, take photos, and store data locally when offline — with the ability to manually sync once reconnected to the internet.
 
----
 
 ## 📋 Description
 
 **Driver App** enables seamless, secure delivery confirmation workflows in areas with unreliable or no internet. With features like digital signature capture, photo proof, and manual sync, it is ideal for last-mile delivery services, field technicians, or logistics providers.
 
----
 
 ## 🛠️ Tech Stack
 
@@ -27,12 +25,11 @@ An **offline-first Flutter app** built for delivery drivers and couriers to coll
 - **Build Tools:** Drift Dev, Build Runner
 - **Design Assets:** Cupertino Icons, Material Design
 
----
 
 ## 📱 Features
 
 - ✅ **Offline-First Architecture**  
-  Capture and store delivery data while offline using local database (Drift).
+  Capture and store delivery data while offline using a local database.
 
 - 📸 **Photo Capture**  
   Take photos of delivered items for digital proof.
@@ -45,27 +42,6 @@ An **offline-first Flutter app** built for delivery drivers and couriers to coll
 
 - 🔒 **Secure & Lightweight**  
   Designed for low-resource environments with secure local data storage.
-
-## 📁 Folder Structure
-
-driver_app/
-│
-├── lib/
-│ ├── main.dart
-│ ├── models/ # POD data models
-│ ├── services/ # Firebase, local DB, connectivity, sync
-│ ├── screens/ # UI Screens (Capture, Sync, Dashboard)
-│ └── widgets/ # Shared/reusable components
-│
-├── assets/ # Icons & image placeholders
-├── pubspec.yaml # App dependencies
-└── README.md
-
-yaml
-Copy
-Edit
-
----
 
 ## ⚙️ Getting Started
 
